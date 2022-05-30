@@ -14,12 +14,49 @@ class Solution {
 public:
 	/* can be completed */
 
-	std::vector<unsigned> sigma;
-	std::vector<double>   x;
+    std::vector<unsigned> sigma;
+    std::vector<double>   x;
 
-	double fitness;
+    double fitness;
 
-	std::ostream & printOn(std::ostream & _os) const {
+    Solution() {
+        fitness = 100000;
+    }
+
+    Solution(int _size) {
+        sigma.resize(_size);
+        x.resize(_size);
+
+        fitness = 100000;
+    }
+
+    Solution(const Solution& _s) {
+        sigma.resize(_s.sigma.size());
+        x.resize(_s.sigma.size());
+
+        for(unsigned i = 0; i < sigma.size(); i++) {
+            sigma[i] = _s.sigma[i];
+            x[i] = _s.x[i];
+        }
+
+        fitness = _s.fitness;
+    }
+
+    Solution& operator=(const Solution & _s) {
+        sigma.resize(_s.sigma.size());
+        x.resize(_s.sigma.size());
+
+        for(unsigned i = 0; i < sigma.size(); i++) {
+            sigma[i] = _s.sigma[i];
+            x[i] = _s.x[i];
+        }
+
+        fitness = _s.fitness;
+
+        return *this;
+    }
+
+    std::ostream & printOn(std::ostream & _os) const {
 		_os << fitness << " " << sigma.size() ;
 
 		for(unsigned s : sigma) {
