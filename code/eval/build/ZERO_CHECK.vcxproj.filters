@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\clair\Documents\Cours\M1I2L\opti\projet-optimisation-2022-master\code\eval\build\CMakeFiles\5b0c14ae20947c49dfbfdfb9b06baf23\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DF616849-DE09-3016-9C7A-3662E425B781}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

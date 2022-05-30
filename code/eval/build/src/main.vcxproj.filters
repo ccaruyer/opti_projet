@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\clair\Documents\Cours\M1I2L\opti\projet-optimisation-2022-master\code\eval\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\clair\Documents\Cours\M1I2L\opti\projet-optimisation-2022-master\code\eval\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{89A4B8D7-1B28-318D-BC5F-FAFB96F3D26C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
