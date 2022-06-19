@@ -34,6 +34,7 @@ int main(int argc, char ** argv) {
     solution.sigma.resize(numberOfPositions);
     solution.x.resize(numberOfPositions);
 
+    cout << "Basic Solution"<< endl;
     // basic solution
     for(int i = 0; i < numberOfPositions; i++) {
       solution.sigma[i] = i;
@@ -46,6 +47,8 @@ int main(int argc, char ** argv) {
     // print
     cout << solution << endl;
 
+
+    /* cout << "Random Solution"<< endl;
     // random solution
 
     auto rng = std::default_random_engine {};
@@ -66,7 +69,75 @@ int main(int argc, char ** argv) {
     peval(solution);
 
     // print
+    cout << solution << endl; */
+
+
+    cout << "HCBest Solution"<< endl;
+    //hillClimberBestImprovement hcBestImprovement();
+
+    bool optimum = false;
+
+    while (!optimum) {
+        double current_fitness = solution.fitness;
+
+        int iBest = 0;
+        int jBest = 0;
+
+        peval(solution);
+
+        double fBest = solution.fitness;
+
+        for(unsigned i = 0; i < solution.x.size(); i++) {
+            for(unsigned j = 0; j < solution.x.size(); j++) {
+                int temp_i_x = solution.x[i];
+                int temp_i_sigma = solution.sigma[i];
+                solution.x[i] = solution.x[j];
+                solution.x[j] = temp_i_x;
+                solution.sigma[i] = solution.sigma[j];
+                solution.sigma[j] = temp_i_sigma;
+
+                peval(solution);
+
+                if (fBest > solution.fitness) {
+                    iBest = i;
+                    jBest = j;
+                    fBest = solution.fitness;
+                }
+
+                solution.x[j] = solution.x[i];
+                solution.x[i] = temp_i_x;
+                solution.sigma[j] = solution.sigma[i];
+                solution.sigma[i] = temp_i_sigma;
+
+            }
+        }
+        solution.fitness = current_fitness;
+
+        if (solution.fitness > fBest) {
+            int temp = solution.x[iBest];
+            solution.x[iBest] = solution.x[jBest];
+            solution.x[jBest] = temp;
+
+            temp = solution.sigma[iBest];
+            solution.sigma[iBest] = solution.sigma[jBest];
+            solution.sigma[jBest] = temp;
+
+            solution.fitness = fBest;
+        } else
+            optimum = true;
+    }
+    // compute the fitness
+    peval(solution);
+
+    // print
     cout << solution << endl;
+
+    Solution solution1;
+    solution1.sigma.resize(numberOfPositions);
+    solution1.x.resize(numberOfPositions);
+
+    // print
+    cout << solution1 << endl;
 
     return 0;
 }
