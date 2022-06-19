@@ -132,12 +132,36 @@ int main(int argc, char ** argv) {
     // print
     cout << solution << endl;
 
-    Solution solution1;
-    solution1.sigma.resize(numberOfPositions);
-    solution1.x.resize(numberOfPositions);
+    /* Pseudo code de recuit simulé
+     *
+     * s := s0
+     * e := E(s)
+     * k := 0
+     * tant que k < kmax et e > emax
+     *   sn := voisin(s)
+     *   en := E(sn)
+     *   si en < e ou aléatoire() < P(en - e, temp(k/kmax)) alors
+     *       s := sn; e := en
+     *   k := k + 1
+     *   retourne s
+     *
+     */
 
-    // print
-    cout << solution1 << endl;
+
+    /* Pseudo code recherche Tabou
+     *
+     * Choisir solution initiale s ∈ S
+     * Initialiser Tabou M
+     * repeat
+     *      choisir s' ∈ V(s) telle que :
+     *      ( f(s') meilleure solution de V(s) ET Crit`ere d’aspiration vérifié )
+     *      OU f(s') meilleure solution de V(s) non taboue
+     *      s ← s'
+     *      update Tabou M
+     * until Critere d’arret verifie
+     *
+     */
+
 
     return 0;
 }
