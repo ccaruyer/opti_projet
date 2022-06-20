@@ -1,7 +1,7 @@
 -------------------
 Description : Projet de création de poster photo automatique par optimisation
 
-Auteur      : Caruyer Claire et Djama Wassim
+Auteur      : Caruyer Claire et Djamaa Wassim
 
 
 -------------------
