@@ -1,11 +1,21 @@
 -------------------
 Description : Projet de création de poster photo automatique par optimisation
-Auteur      : S. Verel
-Date        : 02/02/2022
+
+Auteur      : Caruyer Claire et Djama Wassim
 
 
 -------------------
-Liste des fichiers et dossiers :
+# Sommaire :
+-  Liste des fichiers et dossiers
+-  Création d'un poster
+-  Commandes
+    -  Fonction d'évaluation en c++
+    -  Pour exécuter
+-  Développement
+
+
+-------------------
+## Liste des fichiers et dossiers :
 
 - code/generator/buildAlbum.py : code python permettant de créer les pages web avec l'album à partir d'un fichier de solution
 - svg                          : dossier de sortir pour recevoir le poster au format svg
@@ -18,7 +28,7 @@ Liste des fichiers et dossiers :
 
 
 -------------------
-Création d'un poster :
+## Création d'un poster :
 
 python code/generator/buildPoster.py out_in_directory poster_file_name_json photo_directory solution_file_name out_file_name
 
@@ -28,8 +38,9 @@ python code/generator/buildPoster.py svg data/poster_48_0.json img data/solution
 Il faut ensuite ouvrir le fichier svg/poster.svg avec un nagivateur web.
 
 -------------------
-Fonction d'évaluation en c++ :
+## Commandes :
 
+### Fonction d'évaluation en c++ :
 
 Pour compiler:
 
@@ -39,6 +50,11 @@ cd build
 cmake ..
 make
 
-Pour exécuter :
+### Pour exécuter :
 
 ./src/main ../../../data/poster_48_0.json
+
+------------------
+## Développement :
+
+- Mise en place d'un algo hcBestImprovement
