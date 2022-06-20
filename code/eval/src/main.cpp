@@ -48,7 +48,6 @@ int main(int argc, char ** argv) {
     // print
     cout << solution << endl;
 
-
     /*cout << "Random Solution"<< endl;
     // random solution
 
@@ -74,69 +73,79 @@ int main(int argc, char ** argv) {
 
 
     cout << "HCBest Solution"<< endl;
+    auto rng = std::default_random_engine {};
+    for (int x = 0 ; x < 10 ; x ++) {
+        std::shuffle(std::begin(solution.sigma), std::end(solution.sigma), rng);
 
-    const clock_t begin_time = clock();
+        cout << "Solution initiale "<< x << " : "<< endl;
+        peval(solution);
+        cout << solution << endl;
 
-    bool optimum = false;
+        const clock_t begin_time = clock();
 
-    while (!optimum) {
-        double current_fitness = solution.fitness;
+        bool optimum = false;
 
-        int iBest = 0;
-        int jBest = 0;
+        while (!optimum) {
+            double current_fitness = solution.fitness;
 
+            int iBest = 0;
+            int jBest = 0;
+
+            peval(solution);
+
+            double fBest = solution.fitness;
+
+            for (unsigned i = 0; i < solution.x.size(); i++) {
+                for (unsigned j = 0; j < solution.x.size(); j++) {
+                    solution.x[i] = 1.0;
+                    int tempIx = solution.x[i];
+                    int tempISigma = solution.sigma[i];
+                    solution.x[i] = solution.x[j];
+                    solution.x[j] = tempIx;
+                    solution.sigma[i] = solution.sigma[j];
+                    solution.sigma[j] = tempISigma;
+
+                    peval(solution);
+
+                    if (fBest > solution.fitness) {
+                        iBest = i;
+                        jBest = j;
+                        fBest = solution.fitness;
+                    }
+
+                    //on remet en place
+                    solution.x[j] = solution.x[i];
+                    solution.x[i] = tempIx;
+                    solution.sigma[j] = solution.sigma[i];
+                    solution.sigma[i] = tempISigma;
+
+                }
+            }
+            solution.fitness = current_fitness;
+
+            if (solution.fitness > fBest) {
+                int temp = solution.x[iBest];
+                solution.x[iBest] = solution.x[jBest];
+                solution.x[jBest] = temp;
+
+                temp = solution.sigma[iBest];
+                solution.sigma[iBest] = solution.sigma[jBest];
+                solution.sigma[jBest] = temp;
+
+                solution.fitness = fBest;
+            } else
+                optimum = true;
+        }
+        // compute the fitness
         peval(solution);
 
-        double fBest = solution.fitness;
+        //Time
+        cout << "Time calcul hcBestImprovement : " << float(clock() - begin_time) / CLOCKS_PER_SEC << " s " << endl;
 
-        for(unsigned i = 0; i < solution.x.size(); i++) {
-            for(unsigned j = 0; j < solution.x.size(); j++) {
-                solution.x[i] = 1.0;
-                int temp_i_x = solution.x[i];
-                int temp_i_sigma = solution.sigma[i];
-                solution.x[i] = solution.x[j];
-                solution.x[j] = temp_i_x;
-                solution.sigma[i] = solution.sigma[j];
-                solution.sigma[j] = temp_i_sigma;
-
-                peval(solution);
-
-                if (fBest > solution.fitness) {
-                    iBest = i;
-                    jBest = j;
-                    fBest = solution.fitness;
-                }
-
-                solution.x[j] = solution.x[i];
-                solution.x[i] = temp_i_x;
-                solution.sigma[j] = solution.sigma[i];
-                solution.sigma[i] = temp_i_sigma;
-
-            }
-        }
-        solution.fitness = current_fitness;
-
-        if (solution.fitness > fBest) {
-            int temp = solution.x[iBest];
-            solution.x[iBest] = solution.x[jBest];
-            solution.x[jBest] = temp;
-
-            temp = solution.sigma[iBest];
-            solution.sigma[iBest] = solution.sigma[jBest];
-            solution.sigma[jBest] = temp;
-
-            solution.fitness = fBest;
-        } else
-            optimum = true;
+        // print
+        cout << "Best Solution " << x << " : "<< endl;
+        cout << solution << endl;
     }
-    // compute the fitness
-    peval(solution);
-
-    //Time
-    cout << "Time calcul hcBestImprovement : " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " s " << endl;
-
-    // print
-    cout << solution << endl;
 
 
     /* Pseudo code de recherche local ISL
