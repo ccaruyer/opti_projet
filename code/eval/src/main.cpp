@@ -13,6 +13,7 @@
 #include <math.h>
 #include <algorithm>
 #include <random>
+#include <ctime>
 
 #include "posterEval.h"
 
@@ -48,7 +49,7 @@ int main(int argc, char ** argv) {
     cout << solution << endl;
 
 
-    /* cout << "Random Solution"<< endl;
+    /*cout << "Random Solution"<< endl;
     // random solution
 
     auto rng = std::default_random_engine {};
@@ -69,11 +70,12 @@ int main(int argc, char ** argv) {
     peval(solution);
 
     // print
-    cout << solution << endl; */
+    cout << solution << endl;*/
 
 
     cout << "HCBest Solution"<< endl;
-    //hillClimberBestImprovement hcBestImprovement();
+
+    const clock_t begin_time = clock();
 
     bool optimum = false;
 
@@ -89,6 +91,7 @@ int main(int argc, char ** argv) {
 
         for(unsigned i = 0; i < solution.x.size(); i++) {
             for(unsigned j = 0; j < solution.x.size(); j++) {
+                solution.x[i] = 1.0;
                 int temp_i_x = solution.x[i];
                 int temp_i_sigma = solution.sigma[i];
                 solution.x[i] = solution.x[j];
@@ -129,8 +132,12 @@ int main(int argc, char ** argv) {
     // compute the fitness
     peval(solution);
 
+    //Time
+    cout << "Time calcul hcBestImprovement : " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " s " << endl;
+
     // print
     cout << solution << endl;
+
 
     /* Pseudo code de recherche local ISL
      *
